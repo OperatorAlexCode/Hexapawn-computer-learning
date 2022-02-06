@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexapawn</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Welcome To Hell!</h1>
+    <table id="board">
+        <tr>
+            <td><div class="pawn AI">A</div></td>
+            <td><div class="pawn AI">A</div></td>
+            <td><div class="pawn AI">A</div></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div class="pawn own">P</div></td>
+            <td><div class="pawn own">P</div></td>
+            <td><div class="pawn own">P</div></td>
+        </tr>
+    </table>
+    <div class="score-display">
+        <div>
+            <h2>Player</h2>
+            <p id="PlayerScore">0</p>
+        </div>
+        <div>
+            <h2>Computer</h2>
+            <p id="ComputerScore">0</p>
+        </div>
+    </div>
+    <button id="nextRoundBtn">Next Round</button>
+    <script src="js/code.js"></script>
+    <script src="js/AI.js"></script>
+</body>
+</html>

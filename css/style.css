@@ -1,0 +1,61 @@
+:root {
+    --size: 66px;
+    --selectColor: pink;
+    --moveToClr: rgb(255, 166, 0);
+}
+
+table {
+    border: 1px solid black;
+    background-color: black;
+}
+
+tr {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+td {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: var(--size);
+    height: var(--size);
+    border: 2px solid black;
+    text-align: center;
+    font-size: large;
+    background-color: white;
+    padding: 0;
+}
+
+.pawn {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.pawn input{
+    appearance: none;
+    display: none;
+}
+
+.selected {
+    background-color: var(--selectColor);
+}
+
+.score-display {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    text-align: center;
+}
+
+.moveTo {
+    border-color: var(--moveToClr);
+}
+
+#nextRoundBtn {
+    display: none;
+}
