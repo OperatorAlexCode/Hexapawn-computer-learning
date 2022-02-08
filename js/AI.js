@@ -1,478 +1,376 @@
+const Tiles = {
+    "TL": [0, 0],
+    "T": [0, 1],
+    "TR": [0, 2],
+    "ML": [1, 0],
+    "M": [1, 1],
+    "MR": [1, 2],
+    "BL": [2, 0],
+    "B": [2, 1],
+    "BR": [2, 2],
+};
+
+const moves = {
+    "T": {
+        "LF": [Tiles["TL"], Tiles["ML"]],
+        "LD": [Tiles["TL"], Tiles["M"]],
+        "MDL": [Tiles["T"], Tiles["ML"]],
+        "MF": [Tiles["T"], Tiles["M"]],
+        "MDR": [Tiles["T"], Tiles["MR"]],
+        "RF": [Tiles["TR"], Tiles["MR"]],
+        "RD": [Tiles["TR"], Tiles["M"]],
+    },
+    "M": {
+        "LF": [Tiles["ML"], Tiles["BL"]],
+        "LD": [Tiles["ML"], Tiles["B"]],
+        "MDL": [Tiles["M"], Tiles["BL"]],
+        "MF": [Tiles["M"], Tiles["B"]],
+        "MDR": [Tiles["M"], Tiles["BR"]],
+        "RF": [Tiles["MR"], Tiles["BR"]],
+        "RD": [Tiles["MR"], Tiles["B"]],
+    }
+}
+
 const boardStates2 = [
     [
-        ["A","A","A"],
-        ["P","",""],
-        ["","P","P"]
+        ["A", "A", "A"],
+        ["P", "", ""],
+        ["", "P", "P"]
     ],
     [
-        ["A","A","A"],
-        ["","P",""],
-        ["P","","P"]
+        ["A", "A", "A"],
+        ["", "P", ""],
+        ["P", "", "P"]
     ],
     [
-        ["A","A","A"],
-        ["","","P"],
-        ["P","P",""]
+        ["A", "A", "A"],
+        ["", "", "P"],
+        ["P", "P", ""]
     ]
 ];
 
 let Moves2 = [
     [
-        [
-            [0,1],
-            [1,0]
-        ],
-        [
-            [0,1],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,2]
-        ]
+        moves["T"]["MDL"],
+        moves["T"]["MF"],
+        moves["T"]["RF"]
     ],
     [
-        [
-            [0,0],
-            [1,0]
-        ],
-        [
-            [0,0],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,2]
-        ],
-        [
-            [0,2],
-            [1,1]
-        ]
+        moves["T"]["MF"],
+        moves["T"]["LD"],
+        moves["T"]["RF"],
+        moves["T"]["RD"]
     ],
     [
-        [
-            [0,0],
-            [1,0]
-        ],
-        [
-            [0,1],
-            [1,1]
-        ],
-        [
-            [0,1],
-            [1,2]
-        ]
+        moves["T"]["LF"],
+        moves["T"]["MF"],
+        moves["T"]["MDR"]
     ]
 ];
 
 const boardStates4 = [
     [
-        [ "","A","A"],
-        ["A","P","P"],
+        ["", "A", "A"],
+        ["A", "P", "P"],
         ["P", "", ""]
     ],
     [
-        [ "","A","A"],
-        ["","A","P"],
-        ["P","", ""]
-    ],
-    [
-        ["A","A",""],
-        ["P","","P"],
-        ["", "","P"]
-    ],
-    [
-        ["A","","A"],
-        ["P", "",""],
-        ["","", "P"]
-    ],
-    [
-        ["A","A", ""],
-        ["P","P","A"],
-        [ "", "","P"]
-    ],
-    [
-        ["A", "","A"],
-        ["P","P", ""],
-        [ "","P", ""]
-    ],
-    [
-        ["","A","A"],
-        ["P","A",""],
-        ["","", "P"]
-    ],
-    [
-        ["","A","A"],
-        ["", "P",""],
-        ["","", "P"]
-    ],
-    [
-        ["A", "","A"],
-        ["A","P", ""],
-        [ "", "","p"]
-    ],
-    [
-        ["A", "","A"],
-        ["A", "","P"],
-        [ "","P", ""]
-    ],
-    [
-        [ "","A","A"],
-        [ "","P", ""],
+        ["", "A", "A"],
+        ["", "A", "P"],
         ["P", "", ""]
     ],
     [
-        ["A","","A"],
-        [ "","","P"],
-        ["P", "",""]
+        ["A", "A", ""],
+        ["P", "", "P"],
+        ["", "", "P"]
     ],
     [
-        ["A", "","A"],
+        ["A", "", "A"],
+        ["P", "", ""],
+        ["", "", "P"]
+    ],
+    [
+        ["A", "A", ""],
+        ["P", "P", "A"],
+        ["", "", "P"]
+    ],
+    [
+        ["A", "", "A"],
+        ["P", "P", ""],
+        ["", "P", ""]
+    ],
+    [
+        ["", "A", "A"],
+        ["P", "A", ""],
+        ["", "", "P"]
+    ],
+    [
+        ["", "A", "A"],
+        ["", "P", ""],
+        ["", "", "P"]
+    ],
+    [
+        ["A", "", "A"],
+        ["A", "P", ""],
+        ["", "", "p"]
+    ],
+    [
+        ["A", "", "A"],
+        ["A", "", "P"],
+        ["", "P", ""]
+    ],
+    [
+        ["", "A", "A"],
+        ["", "P", ""],
+        ["P", "", ""]
+    ],
+    [
+        ["A", "", "A"],
+        ["", "", "P"],
+        ["P", "", ""]
+    ],
+    [
+        ["A", "", "A"],
         ["A", "", ""],
-        [ "", "","p"]
+        ["", "", "p"]
     ],
     [
-        ["A","","A"],
-        [ "","","P"],
-        ["P", "",""]
+        ["A", "A", ""],
+        ["", "P", ""],
+        ["P", "", ""]
+    ],
+    [
+        ["", "A", "A"],
+        ["P", "", "P"],
+        ["P", "", ""]
+    ],
+    [
+        ["A", "", "A"],
+        ["A", "", ""],
+        ["", "P", ""]
     ],
 ];
 
 let Moves4 = [
     [
-        [
-            [0,1],
-            [1,2]
-        ],
-        [
-            [0,2],
-            [1,1]
-        ]
+        moves["T"]["MDR"],
+        moves["T"]["RD"]
     ],
     [
-        [
-            [0,1],
-            [1,0]
-        ],
-        [
-            [0,1],
-            [1,1]
-        ],
-        [
-            [0,1],
-            [1,2]
-        ],
-        [
-            [0,1],
-            [1,2]
-        ]
+        moves["M"]["MDL"],
+        moves["M"]["MF"],
+        moves["T"]["MDR"]
     ],
     [
-        [
-            [0,1],
-            [1,0]
-        ],
-        [
-            [0,1],
-            [1,1]
-        ],
-        [
-            [0,1],
-            [1,2]
-        ]
+        moves["T"]["MDL"],
+        moves["T"]["MF"],
+        moves["T"]["MDR"]
     ],
     [
-        [
-            [0,2],
-            [1,2]
-        ]
+        moves["T"]["RF"]
     ],
     [
-        [
-            [0,0],
-            [1,1]
-        ],
-        [
-            [0,1],
-            [1,0]
-        ]
+        moves["T"]["LD"],
+        moves["T"]["MDL"]
     ],
     [
-        [
-            [0,0],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,2]
-        ]
+        moves["T"]["LD"],
+        moves["T"]["RD"],
+        moves["T"]["RF"]
     ],
     [
-        [
-            [0,1],
-            [1,0]
-        ],
-        [
-            [0,2],
-            [1,2]
-        ],
-        [
-            [1,1],
-            [2,1]
-        ],
-        [
-            [1,1],
-            [2,2]
-        ]
+        moves["T"]["MDL"],
+        moves["T"]["RF"],
+        moves["M"]["MF"],
+        moves["M"]["MDR"]
     ],
     [
-        [
-            [0,2],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,2]
-        ]
+        moves["T"]["RD"],
+        moves["T"]["RF"]
     ],
     [
-        [
-            [0,0],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,2]
-        ],
-        [
-            [1,0],
-            [2,0]
-        ]
+        moves["T"]["LD"],
+        moves["T"]["RD"],
+        moves["T"]["RF"],
+        moves["M"]["LF"]
     ],
     [
-        [
-            [1,0],
-            [2,0]
-        ],
-        [
-            [1,0],
-            [2,1]
-        ]
+        moves["M"]["LF"],
+        moves["M"]["LD"]
     ],
     [
-        [
-            [0,2],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,2]
-        ]
+        moves["T"]["RD"],
+        moves["T"]["RF"]
     ],
     [
-        [
-            [0,0],
-            [1,0]
-        ]
+        moves["T"]["LF"]
     ],
     [
-        [
-            [0,2],
-            [1,2]
-        ],
-        [
-            [1,0],
-            [2,0]
-        ]
+        moves["T"]["RF"],
+        moves["M"]["LF"]
     ],
     [
-        [
-            [0,0],
-            [1,0]
-        ],
-        [
-            [1,2],
-            [2,2]
-        ]
+        moves["T"]["LF"]
+    ],
+    [
+        moves["T"]["MF"],
+        moves["T"]["MDR"]
+    ],
+    [
+        moves["M"]["LF"],
+        moves["M"]["LD"],
+        moves["T"]["RF"]
     ],
 ];
 
 const boardStates6 = [
     [
-        [ "","A", ""],
-        ["A","P","P"],
-        [ "", "", ""]
+        ["", "A", ""],
+        ["A", "P", "P"],
+        ["", "", ""]
     ],
     [
         ["A", "", ""],
-        ["A","P"," "],
-        [ "", "", ""]
+        ["A", "P", ""],
+        ["", "", ""]
     ],
     [
         ["A", "", ""],
-        ["A","A","P"],
-        [ "", ""," "]
+        ["A", "A", "P"],
+        ["", "", " "]
     ],
     [
         ["A", "", ""],
-        ["P","P","P"],
-        [ "", "", ""]
+        ["P", "P", "P"],
+        ["", "", ""]
     ],
     [
-        [ "","", "A"],
-        ["P","A","A"],
-        [ "", "", ""]
+        ["", "", "A"],
+        ["P", "A", "A"],
+        ["", "", ""]
     ],
     [
-        [ "","A", ""],
-        ["P","A", ""],
-        [ "", "", ""]
+        ["", "A", ""],
+        ["P", "A", ""],
+        ["", "", ""]
     ],
     [
-        [ "", "","A"],
-        ["A","P", ""],
-        [ "", "", ""]
+        ["", "", "A"],
+        ["A", "P", ""],
+        ["", "", ""]
     ],
     [
-        [ "", "","A"],
-        [ "","P","A"],
-        [ "", "", ""]
+        ["", "", "A"],
+        ["", "P", "A"],
+        ["", "", ""]
     ],
     [
-        [ "","A", ""],
-        ["P","P","A"],
-        [ "", "", ""]
+        ["", "A", ""],
+        ["P", "P", "A"],
+        ["", "", ""]
     ],
     [
-        [ "", "","A"],
-        ["A","A","P"],
-        [ "", "", ""]
+        ["", "", "A"],
+        ["A", "A", "P"],
+        ["", "", ""]
     ],
     [
-        [ "","A", ""],
-        [ "","A","P"]
-        [ "", "", ""]
+        ["", "A", ""],
+        ["", "A", "P"]
+        ["", "", ""]
+    ],
+    [
+        ["A", "", ""],
+        ["P", "A", "P"],
+        ["", "", " "]
+    ],
+    [
+        ["A", "", ""],
+        ["P", "P", "A"],
+        ["", "", ""]
+    ],
+    [
+        ["", "", "A"],
+        ["A", "P", "A"],
+        ["", "", ""]
+    ],
+    [
+        ["A", "", ""],
+        ["A", "", "P"],
+        ["", "", " "]
+    ],
+    [
+        ["A", "", ""],
+        ["A", "P", "A"],
+        ["", "", ""]
     ]
 ];
 
 let Moves6 = [
     [
-        [
-            [0,1],
-            [1,2]
-        ],
-        [
-            [1,0],
-            [2,0]
-        ]
+        moves["T"]["MDR"],
+        moves["M"]["LF"]
     ],
     [
-        [
-            [0,0],
-            [1,1]
-        ],
-        [
-            [1,0],
-            [2,0]
-        ]
+        moves["T"]["LD"],
+        moves["M"]["LF"]
     ],
     [
-        [
-            [1,0],
-            [2,0]
-        ],
-        [
-            [1,1],
-            [2,1]
-        ]
+        moves["M"]["LF"],
+        moves["M"]["MF"]
     ],
     [
-        [
-            [0,1],
-            [1,2]
-        ]
+        moves["T"]["LD"]
     ],
     [
-        [
-            [0,1],
-            [1,0]
-        ],
-        [
-            [1,1],
-            [2,1]
-        ]
+        moves["T"]["MDL"],
+        moves["M"]["MF"]
     ],
     [
-        [
-            [1,1],
-            [2,1]
-        ],
-        [
-            [1,2],
-            [2,2]
-        ]
+        moves["M"]["MF"],
+        moves["M"]["RF"]
     ],
     [
-        [
-            [0,2],
-            [1,1]
-        ],
-        [
-            [0,2],
-            [1,2]
-        ],
-        [
-            [1,0],
-            [2,0]
-        ]
+        moves["T"]["RD"],
+        moves["T"]["RF"],
+        moves["M"]["LF"]
     ],
     [
-        [
-            [0,2],
-            [1,1]
-        ],
-        [
-            [1,2],
-            [2,2]
-        ]
+        moves["T"]["RD"],
+        moves["M"]["RF"]
     ],
     [
-        [
-            [0,1],
-            [1,0]
-        ],
-        [
-            [1,2],
-            [2,2]
-        ]
+        moves["T"]["MDL"],
+        moves["M"]["RF"]
     ],
     [
-        [
-            [1,0],
-            [2,0]
-        ],
-        [
-            [1,1],
-            [2,1]
-        ]
+        moves["M"]["LF"],
+        moves["M"]["MF"]
     ],
     [
-        [
-            [0,1],
-            [1,2]
-        ],
-        [
-            [1,1],
-            [2,1]
-        ]
+        moves["T"]["MDR"],
+        moves["M"]["MF"]
+    ],
+    [
+        moves["M"]["MF"]
+    ],
+    [
+        moves["T"]["LD"],
+        moves["M"]["RF"]
+    ],
+    [
+        moves["T"]["RD"],
+        moves["M"]["RF"],
+        moves["M"]["LF"]
+    ],
+    [
+        moves["M"]["LF"]
+    ],
+    [
+        moves["M"]["LF"],
+        moves["M"]["DF"],
+        moves["M"]["RF"],
+        moves["M"]["DF"]
     ]
 ];
 
@@ -484,25 +382,24 @@ function Computer() {
     if (playing === true) {
         switch (turn) {
             case 2:
-                Turn(States[0],MoveSets[0]);
+                Turn(States[0], MoveSets[0]);
                 break;
-    
+
             case 4:
-                Turn(States[1],MoveSets[1]);
+                Turn(States[1], MoveSets[1]);
                 break;
-    
+
             case 6:
-                Turn(States[2],MoveSets[2]);
+                Turn(States[2], MoveSets[2]);
                 break;
-                
+
             default:
                 console.log("ERROR!");
                 break;
         }
         for (let x = 0; x < 3; x++) {
-            if (gameBoard.rows[2].cells[x].innerHTML == createPawn("AI",true)) {
-                console.log("Computer");
-                updateDisplay("AI");
+            if (gameBoard.rows[2].cells[x].innerHTML == createPawn("AI", true)) {
+                End("AI");
                 RemoveEventsToPawns();
                 return;
             }
@@ -522,20 +419,21 @@ function checker(array1, array2) {
 }
 
 function Turn(Board, MoveSet) {
+    console.log("Turn", turn);
     let current = CurrentBoard();
     let stateIndex;
-    // console.log("Current board",current);
+    console.log("Current board",current);
     // console.log(Board);
     for (board in Board) {
         // console.log("Board",Board[board]);
         // console.log(checker(current,Board[board]));
-        if (checker(current,Board[board])) {
+        if (checker(current, Board[board])) {
             // console.log("Identified board", Board[board],Board.indexOf(Board[board]))
             stateIndex = Board.indexOf(Board[board]);
             break;
         }
     }
-    if (stateIndex !== null && stateIndex !== undefined && checker(current,Board[stateIndex])) {
+    if (stateIndex !== null && stateIndex !== undefined && checker(current, Board[stateIndex])) {
         let moves = MoveSet[stateIndex];
         // console.log("moves",moves)
         let random = Math.floor(Math.random() * moves.length);
@@ -545,7 +443,6 @@ function Turn(Board, MoveSet) {
         gameBoard.rows[SelectedMove[0][0]].cells[SelectedMove[0][1]].innerHTML = "";
         MoveList.push([stateIndex, random, SelectedMove]);
         turn++;
-        console.log("Turn", turn);
         checkBoard();
     }
     else {
